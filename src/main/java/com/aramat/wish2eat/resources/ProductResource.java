@@ -1,15 +1,18 @@
 package com.aramat.wish2eat.resources;
 
 import com.aramat.wish2eat.dto.ProductDTO;
-import com.aramat.wish2eat.dto.StoreDTO;
+import com.aramat.wish2eat.entities.Product;
 import com.aramat.wish2eat.service.ProductService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.RepositoryDefinition;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Set;
+
+@Api(tags = "Product")
 
 @RestController
 @RequestMapping(value = "/product")
