@@ -15,11 +15,6 @@ public class Wish2eatApplication {
 		SpringApplication.run(Wish2eatApplication.class, args);
 	}
 
-	@Bean
-	public Docket api() {
-		return new Docket(DocumentationType.OAS_30).select()
-				.apis(RequestHandlerSelectors.basePackage("com.aramat.wish2eat.resources"))
-				.paths(PathSelectors.any()).build();
-	}
+
 
 }
