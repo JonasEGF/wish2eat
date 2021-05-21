@@ -14,8 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
-
-
+import java.util.Optional;
 
 @Service
 public class StoreService {
@@ -30,8 +29,15 @@ public class StoreService {
         return converter.fromEntityListToDtoList(repository.findAll());
     }
 
+    @Transactional(readOnly = true)
+    public StoreDTO findById(Long id) {
+        Optional<Store> obj = repository.findById(id);
+        Store entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+        return converter.fromEntityToDTO(entity);
+    }
+
     @Transactional
-    public StoreDTO insert(StoreDTO dto){
+    public StoreDTO insert(StoreDTO dto) {
         Store store = converter.fromDtoToEntity(dto);
         store = repository.save(store);
         return converter.fromEntityToDTO(store);
@@ -59,7 +65,7 @@ public class StoreService {
         }
     }
 
-    private Store copyDtoToEntity(StoreDTO dto, Store store){
+    private Store copyDtoToEntity(StoreDTO dto, Store store) {
         store.setName(dto.getName());
         store.setFacebook(dto.getFacebook());
         store.setNumber(dto.getNumber());

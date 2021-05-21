@@ -22,6 +22,12 @@ public class StoreResource {
         return ResponseEntity.ok(service.findAll());
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<StoreDTO> findById(@PathVariable Long id){
+        StoreDTO dto = service.findById(id);
+        return ResponseEntity.ok().body(dto);
+    }
+
     @PostMapping
     public ResponseEntity<StoreDTO> insert(@RequestBody StoreDTO dto){
         dto = service.insert(dto);
