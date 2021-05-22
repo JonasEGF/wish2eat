@@ -1,11 +1,10 @@
 package com.aramat.wish2eat.resources;
 
 import com.aramat.wish2eat.dto.ProductDTO;
-import com.aramat.wish2eat.entities.Product;
+import com.aramat.wish2eat.dto.StoreDTO;
 import com.aramat.wish2eat.service.ProductService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.RepositoryDefinition;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +23,12 @@ public class ProductResource {
     public ResponseEntity<Set<ProductDTO>> findAll(){
         Set<ProductDTO> list= service.findAll();
         return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ProductDTO> findById(@PathVariable Long id){
+        ProductDTO dto = service.findById(id);
+        return ResponseEntity.ok().body(dto);
     }
 
     @PostMapping

@@ -1,8 +1,6 @@
 package com.aramat.wish2eat.converter;
 
-import com.aramat.wish2eat.dto.ProductDTO;
 import com.aramat.wish2eat.dto.StoreDTO;
-import com.aramat.wish2eat.entities.Product;
 import com.aramat.wish2eat.entities.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,8 +25,6 @@ public class StoreConverter {
         return store;
     }
 
-
-
     public StoreDTO fromEntityToDTO(Store entity){
         StoreDTO dto = new StoreDTO();
         dto.setId(entity.getId());
@@ -40,8 +36,6 @@ public class StoreConverter {
         dto.setProducts(entity.getProducts().stream().map(x->productConverter.fromEntityToDto(x)).collect(Collectors.toSet()));
         return dto;
     }
-
-
 
     public Store fromDtoToEntity(Long id) {
         Store entity = new Store();

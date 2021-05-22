@@ -13,10 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -32,6 +33,13 @@ public class ProductService {
         return converter.fromEntityListToDtoList(list);
     }
 
+    @Transactional(readOnly = true)
+    public ProductDTO findById(Long id) {
+        Optional<Product> obj = repository.findById(id);
+        Product entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+        return converter.fromEntityToDto(entity);
+    }
+
     @Transactional
     public ProductDTO insert(ProductDTO dto) {
         Product entity = converter.fromDtoToEntity(dto);
@@ -39,7 +47,7 @@ public class ProductService {
         return converter.fromEntityToDto(entity);
     }
 
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
     public ProductDTO update(Long id, ProductDTO dto) {
         try {
             Product entity = repository.getOne(id);
@@ -50,7 +58,7 @@ public class ProductService {
         }
     }
 
-    @org.springframework.transaction.annotation.Transactional
+    @Transactional
     public void delete(Long id) {
         try {
             repository.deleteById(id);

@@ -1,8 +1,6 @@
 package com.aramat.wish2eat.converter;
 
-import com.aramat.wish2eat.dto.ProductDTO;
 import com.aramat.wish2eat.dto.UserDTO;
-import com.aramat.wish2eat.entities.Product;
 import com.aramat.wish2eat.entities.User;
 import org.springframework.stereotype.Component;
 

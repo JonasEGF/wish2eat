@@ -1,18 +1,36 @@
 package com.aramat.wish2eat.dto;
 
 import com.aramat.wish2eat.entities.Product;
+
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import javax.validation.constraints.NotNull;
 
-public class UserDTO {
+public class UserDTO implements Serializable {
+    private static final long serialVersionUID = 5494145813754202454L;
+
     private Long id;
 
     @NotNull
     private String nome;
 
-    Set<Product> addedProducts;
+    @NotNull
+    private String email;
+
+    Set<Product> addedProducts = new HashSet<>();
+
+    public UserDTO(long id, String nome, String email) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+    }
 
     public UserDTO() {
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Long getId() {
@@ -29,6 +47,14 @@ public class UserDTO {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Set<Product> getAddedProducts() {
