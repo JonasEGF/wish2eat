@@ -2,8 +2,6 @@ package com.aramat.wish2eat.service;
 
 import com.aramat.wish2eat.converter.UserConverter;
 import com.aramat.wish2eat.dto.UserDTO;
-import com.aramat.wish2eat.dto.UserInsertDTO;
-import com.aramat.wish2eat.dto.UserUpdateDTO;
 import com.aramat.wish2eat.entities.User;
 import com.aramat.wish2eat.repositories.UserRepository;
 import com.aramat.wish2eat.service.exceptions.DatabaseException;
@@ -32,6 +30,9 @@ public class UserService  {
     @Autowired
     private UserConverter userConverter;
 
+    @Autowired
+    private ProductService productService;
+
     @Transactional(readOnly = true)
     public List<UserDTO> findAll() {
         return userConverter.fromEntityListToDTOList(repository.findAll());
@@ -45,19 +46,15 @@ public class UserService  {
     }
 
     @Transactional
-    public UserDTO insert(UserInsertDTO dto) {
-        User entity = new User();
-        copyDtoToEntity(dto, entity);
-        entity.setPassword(dto.getPassword());
-        entity = repository.save(entity);
+    public UserDTO insert(UserDTO dto) {
+        User entity = repository.save(userConverter.fromDtoToEntity(dto));
         return userConverter.fromEntityToDTO(entity);
     }
 
     @Transactional
-    public UserDTO update(Long id, @Valid UserUpdateDTO dto) {
+    public UserDTO update(Long id, @Valid UserDTO dto) {
         try {
             User entity = repository.getOne(id);
-            copyDtoToEntity(dto, entity);
             entity = repository.save(entity);
             return userConverter.fromEntityToDTO(entity);
         } catch (EntityNotFoundException e) {
@@ -78,6 +75,5 @@ public class UserService  {
     private void copyDtoToEntity(UserDTO dto, User entity) {
         entity.setNome(dto.getNome());
         entity.setEmail(dto.getEmail());
-
     }
 }

@@ -12,12 +12,12 @@ public class Product {
     private Double value;
     private String description;
 
-    @ManyToOne()
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private Set<Favorite> favoriteList;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "store_id")
     private Store store;
-
-    @ManyToMany(mappedBy = "addedProducts")
-    Set<User> user;
 
     public Long getId() {
         return id;
@@ -59,13 +59,11 @@ public class Product {
         this.store = store;
     }
 
-    public Set<User> getUser() {
-        return user;
+    public Set<Favorite> getFavoriteList() {
+        return favoriteList;
     }
 
-    public void setUser(Set<User> user) {
-        this.user = user;
+    public void setFavoriteList(Set<Favorite> favoriteList) {
+        this.favoriteList = favoriteList;
     }
-
-
 }

@@ -1,7 +1,6 @@
 package com.aramat.wish2eat.entities;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,8 +14,10 @@ public class Store {
     private String instagram;
     private String facebook;
 
-    @OneToMany(mappedBy = "store")
-    private Set<Product> products = new HashSet<>();
+    @OneToMany(fetch = FetchType.LAZY,
+            mappedBy = "store",
+            cascade = CascadeType.ALL)
+    private Set<Product> products;
 
     public Set<Product> getProducts() {
         return products;

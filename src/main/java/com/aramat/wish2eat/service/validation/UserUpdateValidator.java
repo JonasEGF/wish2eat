@@ -1,6 +1,6 @@
 package com.aramat.wish2eat.service.validation;
 
-import com.aramat.wish2eat.dto.UserUpdateDTO;
+import com.aramat.wish2eat.dto.UserDTO;
 import com.aramat.wish2eat.entities.User;
 import com.aramat.wish2eat.repositories.UserRepository;
 import com.aramat.wish2eat.resources.exceptions.FieldMessage;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class UserUpdateValidator implements ConstraintValidator<UserUpdateValid, UserUpdateDTO> {
+public class UserUpdateValidator implements ConstraintValidator<UserUpdateValid, UserDTO> {
 
     @Autowired
     private HttpServletRequest request;
@@ -27,7 +27,7 @@ public class UserUpdateValidator implements ConstraintValidator<UserUpdateValid,
     }
 
     @Override
-    public boolean isValid(UserUpdateDTO dto, ConstraintValidatorContext context) {
+    public boolean isValid(UserDTO dto, ConstraintValidatorContext context) {
         @SuppressWarnings("unchecked")
         var uriVars = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
         long userId = Long.parseLong(uriVars.get("id"));

@@ -1,7 +1,6 @@
 package com.aramat.wish2eat.resources;
 
 import com.aramat.wish2eat.dto.ProductDTO;
-import com.aramat.wish2eat.dto.StoreDTO;
 import com.aramat.wish2eat.service.ProductService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;

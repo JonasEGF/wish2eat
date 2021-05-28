@@ -1,10 +1,6 @@
 package com.aramat.wish2eat.dto;
 
-import com.aramat.wish2eat.entities.User;
-
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
-import java.util.Set;
 
 public class ProductDTO {
 
@@ -17,9 +13,6 @@ public class ProductDTO {
     private String description;
 
     private Long storeID;
-
-    @Null
-    Set<User> user;
 
     public ProductDTO() {
     }
@@ -62,13 +55,5 @@ public class ProductDTO {
 
     public void setStoreID(Long storeID) {
         this.storeID = storeID;
-    }
-
-    public Set<User> getUser() {
-        return user;
-    }
-
-    public void setUser(Set<User> user) {
-        this.user = user;
     }
 }

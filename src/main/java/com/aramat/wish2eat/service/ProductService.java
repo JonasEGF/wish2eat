@@ -2,10 +2,8 @@ package com.aramat.wish2eat.service;
 
 import com.aramat.wish2eat.converter.ProductConverter;
 import com.aramat.wish2eat.dto.ProductDTO;
-import com.aramat.wish2eat.dto.StoreDTO;
 import com.aramat.wish2eat.entities.Product;
 
-import com.aramat.wish2eat.entities.Store;
 import com.aramat.wish2eat.repositories.ProductRepository;
 import com.aramat.wish2eat.service.exceptions.DatabaseException;
 import com.aramat.wish2eat.service.exceptions.ResourceNotFoundException;
@@ -38,6 +36,12 @@ public class ProductService {
         Optional<Product> obj = repository.findById(id);
         Product entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
         return converter.fromEntityToDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public Product findByIdEntity(Long id) {
+        Optional<Product> obj = repository.findById(id);
+        return obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
     }
 
     @Transactional

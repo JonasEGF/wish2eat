@@ -11,26 +11,16 @@ public class User {
     private Long id;
     private String nome;
     private String email;
-
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "product_added",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    Set<Product> addedProducts;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Favorite> favoriteList;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<FavStore> favStoreList;
 
     public Long getId() {
         return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public void setId(Long id) {
@@ -45,12 +35,12 @@ public class User {
         this.nome = nome;
     }
 
-    public Set<Product> getAddedProducts() {
-        return addedProducts;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAddedProducts(Set<Product> addedProducts) {
-        this.addedProducts = addedProducts;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -59,5 +49,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Favorite> getFavoriteList() {
+        return favoriteList;
+    }
+
+    public void setFavoriteList(Set<Favorite> favoriteList) {
+        this.favoriteList = favoriteList;
+    }
+
+    public Set<FavStore> getFavStoreList() {
+        return favStoreList;
+    }
+
+    public void setFavStoreList(Set<FavStore> favStoreList) {
+        this.favStoreList = favStoreList;
     }
 }
