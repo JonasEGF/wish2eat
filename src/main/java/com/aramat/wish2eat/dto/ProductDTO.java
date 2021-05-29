@@ -1,5 +1,6 @@
 package com.aramat.wish2eat.dto;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class ProductDTO {
@@ -11,7 +12,7 @@ public class ProductDTO {
     private Double value;
     @NotNull
     private String description;
-
+    @NotNull
     private Long storeID;
 
     public ProductDTO() {

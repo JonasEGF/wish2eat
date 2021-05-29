@@ -5,6 +5,7 @@ import com.aramat.wish2eat.dto.ProductDTO;
 import com.aramat.wish2eat.entities.Product;
 
 import com.aramat.wish2eat.repositories.ProductRepository;
+import com.aramat.wish2eat.repositories.StoreRepository;
 import com.aramat.wish2eat.service.exceptions.DatabaseException;
 import com.aramat.wish2eat.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class ProductService {
     @Autowired
     private ProductConverter converter;
 
+    @Autowired
+    private StoreRepository storeRepository;
+
     public Set<ProductDTO> findAll() {
         List<Product> list = repository.findAll();
         return converter.fromEntityListToDtoList(list);
@@ -46,7 +50,8 @@ public class ProductService {
 
     @Transactional
     public ProductDTO insert(ProductDTO dto) {
-        Product entity = converter.fromDtoToEntity(dto);
+        Product entity = new Product();
+        copyDtoToEntity(dto, entity);
         entity = repository.save(entity);
         return converter.fromEntityToDto(entity);
     }
@@ -78,6 +83,7 @@ public class ProductService {
         entity.setDescription(dto.getDescription());
         entity.setValue(dto.getValue());
         entity.setName(dto.getName());
+        entity.setStore(storeRepository.findById(dto.getStoreID()).orElseThrow(()->new EntityNotFoundException("Loja inexistente")));
         return entity;
     }
 }
