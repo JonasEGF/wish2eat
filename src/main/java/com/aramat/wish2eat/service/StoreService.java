@@ -71,6 +71,7 @@ public class StoreService {
         store.setNumber(dto.getNumber());
         store.setCep(dto.getCep());
         store.setInstagram(dto.getInstagram());
+        store.setType(dto.getType());
         return store;
     }
 }

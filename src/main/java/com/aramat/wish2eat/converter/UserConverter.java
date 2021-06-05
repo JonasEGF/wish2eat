@@ -1,6 +1,7 @@
 package com.aramat.wish2eat.converter;
 
 import com.aramat.wish2eat.dto.UserDTO;
+import com.aramat.wish2eat.dto.UserInsertDTO;
 import com.aramat.wish2eat.entities.Product;
 import com.aramat.wish2eat.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,12 @@ public class UserConverter {
     @Autowired
     private StoreConverter storeConverter;
 
-    public User fromDtoToEntity(UserDTO dto){
+    public User fromDtoToEntity(UserInsertDTO dto){
         User user = new User();
         user.setNome(dto.getNome());
         user.setEmail(dto.getEmail());
+        user.setPassword(dto.getPassword());
+
         return user;
     }
 

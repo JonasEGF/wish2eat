@@ -21,6 +21,7 @@ public class StoreConverter {
         store.setNumber(dto.getNumber());
         store.setCep(dto.getCep());
         store.setInstagram(dto.getInstagram());
+        store.setType(dto.getType());
         store.setProducts(dto.getProducts().stream().map(x->productConverter.fromDtoToEntity(x)).collect(Collectors.toSet()));
         return store;
     }
@@ -33,6 +34,7 @@ public class StoreConverter {
         dto.setNumber(entity.getNumber());
         dto.setCep(entity.getCep());
         dto.setInstagram(entity.getInstagram());
+        dto.setType(entity.getType());
         dto.setProducts(entity.getProducts().stream().map(x->productConverter.fromEntityToDto(x)).collect(Collectors.toSet()));
         return dto;
     }

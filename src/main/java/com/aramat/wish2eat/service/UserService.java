@@ -1,7 +1,9 @@
 package com.aramat.wish2eat.service;
 
 import com.aramat.wish2eat.converter.UserConverter;
+import com.aramat.wish2eat.dto.LoginDTO;
 import com.aramat.wish2eat.dto.UserDTO;
+import com.aramat.wish2eat.dto.UserInsertDTO;
 import com.aramat.wish2eat.entities.User;
 import com.aramat.wish2eat.repositories.UserRepository;
 import com.aramat.wish2eat.service.exceptions.DatabaseException;
@@ -45,8 +47,15 @@ public class UserService  {
         return userConverter.fromEntityToDTO(entity);
     }
 
+    @Transactional(readOnly = true)
+    public UserDTO findByEmailAndPassword(LoginDTO loginDTO){
+        Optional<User> obj = repository.findByEmailAndPassword(loginDTO.getUsername(),loginDTO.getPassword());
+        User entity = obj.orElseThrow(()->new ResourceNotFoundException("Email and/or password are invalid"));
+        return userConverter.fromEntityToDTO(entity);
+    }
+
     @Transactional
-    public UserDTO insert(UserDTO dto) {
+    public UserDTO insert(UserInsertDTO dto) {
         User entity = repository.save(userConverter.fromDtoToEntity(dto));
         return userConverter.fromEntityToDTO(entity);
     }

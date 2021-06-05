@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/favorite")
 public class FavoriteResource {
@@ -17,7 +19,7 @@ public class FavoriteResource {
     private FavoriteService favoriteService;
 
     @PostMapping
-    public ResponseEntity<String> addFavorite(@RequestBody FavoriteDTO favoriteDTO){
+    public ResponseEntity<String> addFavorite(@RequestBody @Valid FavoriteDTO favoriteDTO){
         favoriteService.createFavorite(favoriteDTO);
 
         return ResponseEntity.ok("Favorite Created");

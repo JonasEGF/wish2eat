@@ -13,6 +13,7 @@ public class Store {
     private String number;
     private String instagram;
     private String facebook;
+    private Integer type;
 
     @OneToMany(fetch = FetchType.LAZY,
             mappedBy = "store",
@@ -73,5 +74,13 @@ public class Store {
 
     public void setFacebook(String facebook) {
         this.facebook = facebook;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

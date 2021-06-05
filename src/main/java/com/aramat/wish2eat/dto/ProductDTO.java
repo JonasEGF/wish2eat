@@ -1,17 +1,24 @@
 package com.aramat.wish2eat.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class ProductDTO {
 
+    @ApiModelProperty(hidden = true)
     private Long id;
-    @NotNull
+
+    @NotBlank
     private String name;
+
     @NotNull
     private Double value;
-    @NotNull
+
+    @NotBlank
     private String description;
+
     @NotNull
     private Long storeID;
 

@@ -1,7 +1,9 @@
 package com.aramat.wish2eat.resources;
 
 
+import com.aramat.wish2eat.dto.LoginDTO;
 import com.aramat.wish2eat.dto.UserDTO;
+import com.aramat.wish2eat.dto.UserInsertDTO;
 import com.aramat.wish2eat.service.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +34,13 @@ public class UserResource {
         return ResponseEntity.ok().body(dto);
     }
 
+    @PostMapping(value = "/login")
+    public ResponseEntity<UserDTO> userLogin(@Valid @RequestBody LoginDTO dto) {
+        return ResponseEntity.ok().body(service.findByEmailAndPassword(dto));
+    }
+
     @PostMapping
-    public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserDTO dto) {
+    public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto) {
         UserDTO newDto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getId()).toUri();
         return ResponseEntity.created(uri).body(newDto);

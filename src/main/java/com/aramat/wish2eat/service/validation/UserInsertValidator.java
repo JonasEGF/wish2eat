@@ -1,6 +1,7 @@
 package com.aramat.wish2eat.service.validation;
 
 import com.aramat.wish2eat.dto.UserDTO;
+import com.aramat.wish2eat.dto.UserInsertDTO;
 import com.aramat.wish2eat.entities.User;
 import com.aramat.wish2eat.repositories.UserRepository;
 import com.aramat.wish2eat.resources.exceptions.FieldMessage;
@@ -11,7 +12,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserInsertValidator implements ConstraintValidator<UserInsertValid, UserDTO> {
+public class UserInsertValidator implements ConstraintValidator<UserInsertValid, UserInsertDTO> {
 
     @Autowired
     private UserRepository repository;
@@ -21,7 +22,7 @@ public class UserInsertValidator implements ConstraintValidator<UserInsertValid,
     }
 
     @Override
-    public boolean isValid(UserDTO dto, ConstraintValidatorContext context) {
+    public boolean isValid(UserInsertDTO dto, ConstraintValidatorContext context) {
 
         List<FieldMessage> list = new ArrayList<>();
 

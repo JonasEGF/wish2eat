@@ -1,22 +1,36 @@
 package com.aramat.wish2eat.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
 public class StoreDTO {
 
+    @ApiModelProperty(hidden = true)
     private Long id;
-    @NotNull
+
+    @NotBlank
     private String name;
-    @NotNull
+
+    @NotBlank
     private String cep;
-    @NotNull
+
+    @NotBlank
     private String number;
-    @NotNull
+
+    @NotBlank
     private String instagram;
-    @NotNull
+
+    @NotBlank
     private String facebook;
+
+    @NotNull
+    private Integer type;
+
+    @ApiModelProperty(hidden = true)
     private Set<ProductDTO> products = new HashSet<>();
 
     public StoreDTO() {
@@ -76,5 +90,13 @@ public class StoreDTO {
 
     public void setProducts(Set<ProductDTO> products) {
         this.products = products;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

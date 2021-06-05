@@ -1,22 +1,28 @@
 package com.aramat.wish2eat.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Set;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class UserDTO implements Serializable {
     private static final long serialVersionUID = 5494145813754202454L;
 
+    @ApiModelProperty(hidden = true)
     private Long id;
 
-    @NotNull
+    @NotBlank
     private String nome;
 
-    @NotNull
+    @NotBlank
     private String email;
 
+    @ApiModelProperty(hidden = true)
     private Set<ProductDTO> addedProducts;
 
+    @ApiModelProperty(hidden = true)
     private Set<StoreDTO> addStores;
 
     public UserDTO(long id, String nome, String email) {

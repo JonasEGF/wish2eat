@@ -29,7 +29,7 @@ public class StoreResource {
     }
 
     @PostMapping
-    public ResponseEntity<StoreDTO> insert(@RequestBody StoreDTO dto){
+    public ResponseEntity<StoreDTO> insert(@RequestBody @Valid StoreDTO dto){
         dto = service.insert(dto);
         return ResponseEntity.ok(dto);
     }
