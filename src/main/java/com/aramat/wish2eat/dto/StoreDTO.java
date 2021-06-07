@@ -22,10 +22,16 @@ public class StoreDTO {
     private String number;
 
     @NotBlank
+    private String phoneNumber;
+
+    @NotBlank
     private String instagram;
 
     @NotBlank
     private String facebook;
+
+    @NotBlank
+    private String email;
 
     @NotNull
     private Integer type;
@@ -98,5 +104,21 @@ public class StoreDTO {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

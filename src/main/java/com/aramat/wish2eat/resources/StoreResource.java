@@ -1,13 +1,16 @@
 package com.aramat.wish2eat.resources;
 
 import com.aramat.wish2eat.dto.StoreDTO;
+import com.aramat.wish2eat.dto.StoreInsertDTO;
 import com.aramat.wish2eat.service.StoreService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @Api(tags = "Store")
@@ -29,15 +32,16 @@ public class StoreResource {
     }
 
     @PostMapping
-    public ResponseEntity<StoreDTO> insert(@RequestBody @Valid StoreDTO dto){
-        dto = service.insert(dto);
-        return ResponseEntity.ok(dto);
+    public ResponseEntity<StoreDTO> insert(@RequestBody @Valid StoreInsertDTO dto){
+        StoreDTO newDto = service.insert(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getId()).toUri();
+        return ResponseEntity.created(uri).body(newDto);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<StoreDTO> update(@PathVariable Long id, @Valid @RequestBody StoreDTO dto) {
-        dto = service.update(id, dto);
-        return ResponseEntity.ok().body(dto);
+    public ResponseEntity<StoreDTO> update(@PathVariable Long id, @Valid @RequestBody StoreInsertDTO dto) {
+        StoreDTO newDto = service.update(id, dto);
+        return ResponseEntity.ok().body(newDto);
     }
 
     @DeleteMapping(value = "/{id}")

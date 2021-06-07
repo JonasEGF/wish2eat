@@ -2,6 +2,7 @@ package com.aramat.wish2eat.service;
 
 import com.aramat.wish2eat.converter.StoreConverter;
 import com.aramat.wish2eat.dto.StoreDTO;
+import com.aramat.wish2eat.dto.StoreInsertDTO;
 import com.aramat.wish2eat.entities.Store;
 import com.aramat.wish2eat.repositories.StoreRepository;
 import com.aramat.wish2eat.service.exceptions.DatabaseException;
@@ -37,14 +38,13 @@ public class StoreService {
     }
 
     @Transactional
-    public StoreDTO insert(StoreDTO dto) {
-        Store store = converter.fromDtoToEntity(dto);
-        store = repository.save(store);
+    public StoreDTO insert(StoreInsertDTO dto) {
+        Store store = repository.save(converter.fromDtoToEntity(dto));
         return converter.fromEntityToDTO(store);
     }
 
     @Transactional
-    public StoreDTO update(Long id, StoreDTO dto) {
+    public StoreDTO update(Long id, StoreInsertDTO dto) {
         try {
             Store entity = repository.getOne(id);
             entity = repository.save(copyDtoToEntity(dto, entity));

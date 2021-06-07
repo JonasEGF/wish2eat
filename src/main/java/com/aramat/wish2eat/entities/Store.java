@@ -11,9 +11,11 @@ public class Store {
     private String name;
     private String cep;
     private String number;
+    private String phoneNumber;
     private String instagram;
     private String facebook;
     private Integer type;
+    private String email;
 
     @OneToMany(fetch = FetchType.LAZY,
             mappedBy = "store",
@@ -82,5 +84,21 @@ public class Store {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

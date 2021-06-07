@@ -1,6 +1,7 @@
 package com.aramat.wish2eat.converter;
 
 import com.aramat.wish2eat.dto.StoreDTO;
+import com.aramat.wish2eat.dto.StoreInsertDTO;
 import com.aramat.wish2eat.entities.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ public class StoreConverter {
     @Autowired
     private ProductConverter productConverter;
 
-    public Store fromDtoToEntity(StoreDTO dto){
+    public Store fromDtoToEntity(StoreInsertDTO dto){
         Store store = new Store();
         store.setName(dto.getName());
         store.setFacebook(dto.getFacebook());
@@ -22,6 +23,8 @@ public class StoreConverter {
         store.setCep(dto.getCep());
         store.setInstagram(dto.getInstagram());
         store.setType(dto.getType());
+        store.setPhoneNumber(dto.getPhoneNumber());
+        store.setEmail(dto.getEmail());
         store.setProducts(dto.getProducts().stream().map(x->productConverter.fromDtoToEntity(x)).collect(Collectors.toSet()));
         return store;
     }
@@ -35,6 +38,8 @@ public class StoreConverter {
         dto.setCep(entity.getCep());
         dto.setInstagram(entity.getInstagram());
         dto.setType(entity.getType());
+        dto.setPhoneNumber(entity.getPhoneNumber());
+        dto.setEmail(entity.getEmail());
         dto.setProducts(entity.getProducts().stream().map(x->productConverter.fromEntityToDto(x)).collect(Collectors.toSet()));
         return dto;
     }
