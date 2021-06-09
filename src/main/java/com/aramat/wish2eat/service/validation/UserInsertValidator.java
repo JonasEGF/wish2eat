@@ -1,6 +1,5 @@
 package com.aramat.wish2eat.service.validation;
 
-import com.aramat.wish2eat.dto.UserDTO;
 import com.aramat.wish2eat.dto.UserInsertDTO;
 import com.aramat.wish2eat.entities.User;
 import com.aramat.wish2eat.repositories.UserRepository;

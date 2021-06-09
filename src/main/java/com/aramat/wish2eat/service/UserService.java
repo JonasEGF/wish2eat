@@ -8,8 +8,6 @@ import com.aramat.wish2eat.entities.User;
 import com.aramat.wish2eat.repositories.UserRepository;
 import com.aramat.wish2eat.service.exceptions.DatabaseException;
 import com.aramat.wish2eat.service.exceptions.ResourceNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -24,16 +22,11 @@ import java.util.Optional;
 @Service
 public class UserService  {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
-
     @Autowired
     private UserRepository repository;
 
     @Autowired
     private UserConverter userConverter;
-
-    @Autowired
-    private ProductService productService;
 
     @Transactional(readOnly = true)
     public List<UserDTO> findAll() {
@@ -49,7 +42,7 @@ public class UserService  {
 
     @Transactional(readOnly = true)
     public UserDTO findByEmailAndPassword(LoginDTO loginDTO){
-        Optional<User> obj = repository.findByEmailAndPassword(loginDTO.getUsername(),loginDTO.getPassword());
+        Optional<User> obj = repository.findByEmailAndPassword(loginDTO.getEmail(),loginDTO.getPassword());
         User entity = obj.orElseThrow(()->new ResourceNotFoundException("Email and/or password are invalid"));
         return userConverter.fromEntityToDTO(entity);
     }
@@ -79,10 +72,5 @@ public class UserService  {
         } catch (DataIntegrityViolationException e) {
             throw new DatabaseException("Integrity Violation");
         }
-    }
-
-    private void copyDtoToEntity(UserDTO dto, User entity) {
-        entity.setNome(dto.getNome());
-        entity.setEmail(dto.getEmail());
     }
 }

@@ -19,6 +19,7 @@ import java.util.Optional;
 
 @Service
 public class StoreService {
+    
     @Autowired
     private StoreRepository repository;
 

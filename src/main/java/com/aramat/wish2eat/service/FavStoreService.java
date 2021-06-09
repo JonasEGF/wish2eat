@@ -1,9 +1,7 @@
 package com.aramat.wish2eat.service;
 
 import com.aramat.wish2eat.dto.FavStoreDTO;
-import com.aramat.wish2eat.dto.FavoriteDTO;
 import com.aramat.wish2eat.entities.FavStore;
-import com.aramat.wish2eat.entities.Favorite;
 import com.aramat.wish2eat.repositories.*;
 import com.aramat.wish2eat.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

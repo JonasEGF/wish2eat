@@ -2,13 +2,11 @@ package com.aramat.wish2eat.converter;
 
 import com.aramat.wish2eat.dto.UserDTO;
 import com.aramat.wish2eat.dto.UserInsertDTO;
-import com.aramat.wish2eat.entities.Product;
 import com.aramat.wish2eat.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -43,10 +41,6 @@ public class UserConverter {
             dto.setAddStores(entity.getFavStoreList().stream().map(favStore -> storeConverter.fromEntityToDTO(favStore.getStore())).collect(Collectors.toSet()));
 
         return dto;
-    }
-
-    private Set<Product> fromAddProdDtoToEntity(UserDTO dto) {
-        return dto.getAddedProducts().stream().map(x -> productConverter.fromDtoToEntity(x)).collect(Collectors.toSet());
     }
 
     public List<UserDTO> fromEntityListToDTOList(List<User> list){
