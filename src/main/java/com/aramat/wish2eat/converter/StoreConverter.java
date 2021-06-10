@@ -25,6 +25,7 @@ public class StoreConverter {
         store.setType(dto.getType());
         store.setPhoneNumber(dto.getPhoneNumber());
         store.setEmail(dto.getEmail());
+        store.setPassword(dto.getPassword());
         store.setProducts(dto.getProducts().stream().map(x->productConverter.fromDtoToEntity(x)).collect(Collectors.toSet()));
         return store;
     }

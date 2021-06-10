@@ -16,6 +16,7 @@ public class Store {
     private String facebook;
     private Integer type;
     private String email;
+    private String password;
 
     @OneToMany(fetch = FetchType.LAZY,
             mappedBy = "store",
@@ -100,5 +101,13 @@ public class Store {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

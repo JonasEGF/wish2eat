@@ -66,13 +66,16 @@ public class StoreService {
         }
     }
 
-    private Store copyDtoToEntity(StoreDTO dto, Store store) {
+    private Store copyDtoToEntity(StoreInsertDTO dto, Store store) {
         store.setName(dto.getName());
-        store.setFacebook(dto.getFacebook());
-        store.setNumber(dto.getNumber());
         store.setCep(dto.getCep());
+        store.setNumber(dto.getNumber());
+        store.setPhoneNumber(dto.getPhoneNumber());
         store.setInstagram(dto.getInstagram());
+        store.setFacebook(dto.getFacebook());
         store.setType(dto.getType());
+        store.setEmail(dto.getEmail());
+        store.setPassword(dto.getPassword());
         return store;
     }
 }
