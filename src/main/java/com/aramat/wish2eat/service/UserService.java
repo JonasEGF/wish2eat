@@ -56,7 +56,7 @@ public class UserService  {
     @Transactional
     public UserDTO update(Long id, @Valid UserInsertDTO dto) {
         try {
-            User entity = repository.getOne(id);
+            User entity = repository.getById(id);
             entity = repository.save(entity);
             return userConverter.fromEntityToDTO(entity);
         } catch (EntityNotFoundException e) {

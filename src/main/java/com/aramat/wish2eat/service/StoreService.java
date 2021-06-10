@@ -47,7 +47,7 @@ public class StoreService {
     @Transactional
     public StoreDTO update(Long id, StoreInsertDTO dto) {
         try {
-            Store entity = repository.getOne(id);
+            Store entity = repository.getById(id);
             entity = repository.save(copyDtoToEntity(dto, entity));
             return converter.fromEntityToDTO(entity);
         } catch (EntityNotFoundException e) {

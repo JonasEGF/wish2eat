@@ -42,12 +42,6 @@ public class ProductService {
         return converter.fromEntityToDto(entity);
     }
 
-    @Transactional(readOnly = true)
-    public Product findByIdEntity(Long id) {
-        Optional<Product> obj = repository.findById(id);
-        return obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-    }
-
     @Transactional
     public ProductDTO insert(ProductDTO dto) {
         Product entity = new Product();
@@ -59,7 +53,7 @@ public class ProductService {
     @Transactional
     public ProductDTO update(Long id, ProductDTO dto) {
         try {
-            Product entity = repository.getOne(id);
+            Product entity = repository.getById(id);
             entity = repository.save(copyDtoToEntity(dto, entity));
             return converter.fromEntityToDto(entity);
         } catch (EntityNotFoundException e) {
