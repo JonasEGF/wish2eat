@@ -8,4 +8,6 @@ import java.util.Set;
 
 public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
     Set<Favorite> findByUser(User user);
+
+    Favorite findByUserIdAndProductId(Long user, Long product);
 }

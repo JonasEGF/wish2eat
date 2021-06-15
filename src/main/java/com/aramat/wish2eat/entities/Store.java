@@ -20,8 +20,7 @@ public class Store {
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY,
-            mappedBy = "store",
-            cascade = CascadeType.ALL)
+            mappedBy = "store", cascade = CascadeType.REMOVE)
     private Set<Product> products;
 
     public Set<Product> getProducts() {

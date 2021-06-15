@@ -21,11 +21,17 @@ public class FavStoreService {
 
     @Transactional
     public void createFavorite(FavStoreDTO favStoreDTO){
-        FavStore entity = new FavStore();
+        FavStore favStore = favStoreRepository.findByStoreIdAndUserId(favStoreDTO.getStore(),favStoreDTO.getUser());
+        if (favStore!=null){
+            favStoreRepository.delete(favStore);
+        }
+        else {
+            FavStore entity = new FavStore();
 
-        copyToEntity(entity, favStoreDTO);
+            copyToEntity(entity, favStoreDTO);
 
-        favStoreRepository.save(entity);
+            favStoreRepository.save(entity);
+        }
     }
 
     private void copyToEntity(FavStore entity, FavStoreDTO favoriteDTO){

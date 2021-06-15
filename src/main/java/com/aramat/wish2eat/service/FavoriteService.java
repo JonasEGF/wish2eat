@@ -23,11 +23,17 @@ public class FavoriteService {
 
     @Transactional
     public void createFavorite(FavoriteDTO favoriteDTO){
-        Favorite entity = new Favorite();
+        Favorite favorite = favoriteRepository.findByUserIdAndProductId(favoriteDTO.getUser(),favoriteDTO.getProduct());
+        if (favorite != null){
+            favoriteRepository.delete(favorite);
+        }
+        else {
+            Favorite entity = new Favorite();
 
-        copyToEntity(entity, favoriteDTO);
+            copyToEntity(entity, favoriteDTO);
 
-        favoriteRepository.save(entity);
+            favoriteRepository.save(entity);
+        }
     }
 
     private void copyToEntity(Favorite entity, FavoriteDTO favoriteDTO){

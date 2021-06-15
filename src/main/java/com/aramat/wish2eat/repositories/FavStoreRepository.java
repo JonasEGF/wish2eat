@@ -8,4 +8,6 @@ import java.util.Set;
 
 public interface FavStoreRepository extends JpaRepository<FavStore, Long> {
     Set<FavStore> findByUser(User user);
+
+    FavStore findByStoreIdAndUserId(Long store, Long user);
 }
