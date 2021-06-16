@@ -1,9 +1,11 @@
 package com.aramat.wish2eat.service;
 
 import com.aramat.wish2eat.converter.StoreConverter;
+import com.aramat.wish2eat.dto.LoginDTO;
 import com.aramat.wish2eat.dto.StoreDTO;
 import com.aramat.wish2eat.dto.StoreInsertDTO;
 import com.aramat.wish2eat.entities.Store;
+import com.aramat.wish2eat.entities.User;
 import com.aramat.wish2eat.repositories.StoreRepository;
 import com.aramat.wish2eat.service.exceptions.DatabaseException;
 import com.aramat.wish2eat.service.exceptions.ResourceNotFoundException;
@@ -78,4 +80,11 @@ public class StoreService {
         store.setPassword(dto.getPassword());
         return store;
     }
+
+    public StoreDTO findByEmailAndPassword(LoginDTO dto) {
+        Optional<Store> obj = repository.findByEmailAndPassword(dto.getEmail(),dto.getPassword());
+        Store entity = obj.orElseThrow(()->new ResourceNotFoundException("Email and/or password are invalid"));
+        return converter.fromEntityToDTO(entity);
+    }
+
 }

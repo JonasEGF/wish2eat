@@ -19,7 +19,7 @@ public class Store {
     private String email;
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY,
+    @OneToMany(fetch = FetchType.EAGER,
             mappedBy = "store", cascade = CascadeType.REMOVE)
     private Set<Product> products;
 
