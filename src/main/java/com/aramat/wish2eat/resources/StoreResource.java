@@ -1,7 +1,9 @@
 package com.aramat.wish2eat.resources;
 
+import com.aramat.wish2eat.dto.LoginDTO;
 import com.aramat.wish2eat.dto.StoreDTO;
 import com.aramat.wish2eat.dto.StoreInsertDTO;
+import com.aramat.wish2eat.dto.UserDTO;
 import com.aramat.wish2eat.service.StoreService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,11 @@ public class StoreResource {
     public ResponseEntity<StoreDTO> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(value = "/login")
+    public ResponseEntity<StoreDTO> userLogin(@Valid @RequestBody LoginDTO dto) {
+        return ResponseEntity.ok().body(service.findByEmailAndPassword(dto));
     }
 
 }
