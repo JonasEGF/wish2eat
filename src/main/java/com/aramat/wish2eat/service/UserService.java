@@ -57,6 +57,9 @@ public class UserService  {
     public UserDTO update(Long id, @Valid UserInsertDTO dto) {
         try {
             User entity = repository.getById(id);
+            entity.setPassword(dto.getPassword());
+            entity.setEmail(dto.getEmail());
+            entity.setNome(dto.getNome());
             entity = repository.save(entity);
             return userConverter.fromEntityToDTO(entity);
         } catch (EntityNotFoundException e) {
