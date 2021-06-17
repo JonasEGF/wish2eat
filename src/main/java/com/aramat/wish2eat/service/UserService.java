@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService  {
+public class UserService {
 
     @Autowired
     private UserRepository repository;
@@ -41,9 +41,9 @@ public class UserService  {
     }
 
     @Transactional(readOnly = true)
-    public UserDTO findByEmailAndPassword(LoginDTO loginDTO){
-        Optional<User> obj = repository.findByEmailAndPassword(loginDTO.getEmail(),loginDTO.getPassword());
-        User entity = obj.orElseThrow(()->new ResourceNotFoundException("Email and/or password are invalid"));
+    public UserDTO findByEmailAndPassword(LoginDTO loginDTO) {
+        Optional<User> obj = repository.findByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword());
+        User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Email and/or password are invalid"));
         return userConverter.fromEntityToDTO(entity);
     }
 
@@ -55,16 +55,12 @@ public class UserService  {
 
     @Transactional
     public UserDTO update(Long id, @Valid UserInsertDTO dto) {
-        try {
-            User entity = repository.getById(id);
-            entity.setPassword(dto.getPassword());
-            entity.setEmail(dto.getEmail());
-            entity.setNome(dto.getNome());
-            entity = repository.save(entity);
-            return userConverter.fromEntityToDTO(entity);
-        } catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Id not found" + id);
-        }
+        User entity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id not found" + id));
+        entity.setPassword(dto.getPassword());
+        entity.setEmail(dto.getEmail());
+        entity.setNome(dto.getNome());
+        entity = repository.save(entity);
+        return userConverter.fromEntityToDTO(entity);
     }
 
     public void delete(Long id) {
