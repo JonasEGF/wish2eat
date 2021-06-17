@@ -2,9 +2,9 @@ package com.aramat.wish2eat.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Set;
-import javax.validation.constraints.NotBlank;
 
 public class UserDTO implements Serializable {
     private static final long serialVersionUID = 5494145813754202454L;

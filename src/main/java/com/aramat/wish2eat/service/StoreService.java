@@ -5,7 +5,6 @@ import com.aramat.wish2eat.dto.LoginDTO;
 import com.aramat.wish2eat.dto.StoreDTO;
 import com.aramat.wish2eat.dto.StoreInsertDTO;
 import com.aramat.wish2eat.entities.Store;
-import com.aramat.wish2eat.entities.User;
 import com.aramat.wish2eat.repositories.StoreRepository;
 import com.aramat.wish2eat.service.exceptions.DatabaseException;
 import com.aramat.wish2eat.service.exceptions.ResourceNotFoundException;
@@ -13,15 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class StoreService {
-    
+
     @Autowired
     private StoreRepository repository;
 
@@ -82,8 +81,8 @@ public class StoreService {
     }
 
     public StoreDTO findByEmailAndPassword(LoginDTO dto) {
-        Optional<Store> obj = repository.findByEmailAndPassword(dto.getEmail(),dto.getPassword());
-        Store entity = obj.orElseThrow(()->new ResourceNotFoundException("Email and/or password are invalid"));
+        Optional<Store> obj = repository.findByEmailAndPassword(dto.getEmail(), dto.getPassword());
+        Store entity = obj.orElseThrow(() -> new ResourceNotFoundException("Email and/or password are invalid"));
         return converter.fromEntityToDTO(entity);
     }
 

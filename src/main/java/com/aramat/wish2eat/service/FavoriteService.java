@@ -22,12 +22,11 @@ public class FavoriteService {
     private ProductRepository productRepository;
 
     @Transactional
-    public void createFavorite(FavoriteDTO favoriteDTO){
-        Favorite favorite = favoriteRepository.findByUserIdAndProductId(favoriteDTO.getUser(),favoriteDTO.getProduct());
-        if (favorite != null){
+    public void createFavorite(FavoriteDTO favoriteDTO) {
+        Favorite favorite = favoriteRepository.findByUserIdAndProductId(favoriteDTO.getUser(), favoriteDTO.getProduct());
+        if (favorite != null) {
             favoriteRepository.delete(favorite);
-        }
-        else {
+        } else {
             Favorite entity = new Favorite();
 
             copyToEntity(entity, favoriteDTO);
@@ -36,8 +35,8 @@ public class FavoriteService {
         }
     }
 
-    private void copyToEntity(Favorite entity, FavoriteDTO favoriteDTO){
+    private void copyToEntity(Favorite entity, FavoriteDTO favoriteDTO) {
         entity.setUser(userRepository.findById(favoriteDTO.getUser()).orElseThrow(() -> new ResourceNotFoundException("Entity not found")));
-        entity.setProduct(productRepository.findById(favoriteDTO.getProduct()).orElseThrow(()-> new ResourceNotFoundException("Entity not found")));
+        entity.setProduct(productRepository.findById(favoriteDTO.getProduct()).orElseThrow(() -> new ResourceNotFoundException("Entity not found")));
     }
 }

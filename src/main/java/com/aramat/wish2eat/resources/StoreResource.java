@@ -3,7 +3,6 @@ package com.aramat.wish2eat.resources;
 import com.aramat.wish2eat.dto.LoginDTO;
 import com.aramat.wish2eat.dto.StoreDTO;
 import com.aramat.wish2eat.dto.StoreInsertDTO;
-import com.aramat.wish2eat.dto.UserDTO;
 import com.aramat.wish2eat.service.StoreService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +22,18 @@ public class StoreResource {
     private StoreService service;
 
     @GetMapping
-    public ResponseEntity<List<StoreDTO>> findAll(){
+    public ResponseEntity<List<StoreDTO>> findAll() {
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<StoreDTO> findById(@PathVariable Long id){
+    public ResponseEntity<StoreDTO> findById(@PathVariable Long id) {
         StoreDTO dto = service.findById(id);
         return ResponseEntity.ok().body(dto);
     }
 
     @PostMapping
-    public ResponseEntity<StoreDTO> insert(@RequestBody @Valid StoreInsertDTO dto){
+    public ResponseEntity<StoreDTO> insert(@RequestBody @Valid StoreInsertDTO dto) {
         StoreDTO newDto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getId()).toUri();
         return ResponseEntity.created(uri).body(newDto);

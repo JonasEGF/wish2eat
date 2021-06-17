@@ -19,7 +19,7 @@ public class FavoriteResource {
     private FavoriteService favoriteService;
 
     @PostMapping
-    public ResponseEntity<String> addFavorite(@RequestBody @Valid FavoriteDTO favoriteDTO){
+    public ResponseEntity<String> addFavorite(@RequestBody @Valid FavoriteDTO favoriteDTO) {
         favoriteService.createFavorite(favoriteDTO);
 
         return ResponseEntity.ok("Favorite Created");

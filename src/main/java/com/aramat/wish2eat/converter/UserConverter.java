@@ -18,7 +18,7 @@ public class UserConverter {
     @Autowired
     private StoreConverter storeConverter;
 
-    public User fromDtoToEntity(UserInsertDTO dto){
+    public User fromDtoToEntity(UserInsertDTO dto) {
         User user = new User();
         user.setNome(dto.getNome());
         user.setEmail(dto.getEmail());
@@ -27,23 +27,23 @@ public class UserConverter {
         return user;
     }
 
-    public UserDTO fromEntityToDTO(User entity){
+    public UserDTO fromEntityToDTO(User entity) {
         UserDTO dto = new UserDTO();
 
         dto.setId(entity.getId());
         dto.setNome(entity.getNome());
         dto.setEmail(entity.getEmail());
 
-        if(entity.getFavoriteList() != null)
+        if (entity.getFavoriteList() != null)
             dto.setAddedProducts(entity.getFavoriteList().stream().map(favorite -> productConverter.fromEntityToDto(favorite.getProduct())).collect(Collectors.toSet()));
 
-        if(entity.getFavStoreList() != null)
+        if (entity.getFavStoreList() != null)
             dto.setAddStores(entity.getFavStoreList().stream().map(favStore -> storeConverter.fromEntityToDTO(favStore.getStore())).collect(Collectors.toSet()));
 
         return dto;
     }
 
-    public List<UserDTO> fromEntityListToDTOList(List<User> list){
+    public List<UserDTO> fromEntityListToDTOList(List<User> list) {
         return list.stream().map(this::fromEntityToDTO).collect(Collectors.toList());
     }
 

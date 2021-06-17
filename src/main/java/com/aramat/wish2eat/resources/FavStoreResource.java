@@ -19,7 +19,7 @@ public class FavStoreResource {
     private FavStoreService favStoreService;
 
     @PostMapping
-    public ResponseEntity<String> addFavorite(@RequestBody @Valid FavStoreDTO favStoreDTO){
+    public ResponseEntity<String> addFavorite(@RequestBody @Valid FavStoreDTO favStoreDTO) {
         favStoreService.createFavorite(favStoreDTO);
 
         return ResponseEntity.ok("Favorite Created");

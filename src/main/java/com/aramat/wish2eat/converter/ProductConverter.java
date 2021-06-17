@@ -15,7 +15,7 @@ public class ProductConverter {
     @Autowired
     private StoreConverter storeConverter;
 
-    public Product fromDtoToEntity(ProductDTO dto){
+    public Product fromDtoToEntity(ProductDTO dto) {
         Product product = new Product();
         product.setId(dto.getId());
         product.setDescription(dto.getDescription());
@@ -25,7 +25,7 @@ public class ProductConverter {
         return product;
     }
 
-    public ProductDTO fromEntityToDto(Product entity){
+    public ProductDTO fromEntityToDto(Product entity) {
         ProductDTO dto = new ProductDTO();
         dto.setId(entity.getId());
         dto.setDescription(entity.getDescription());
@@ -47,11 +47,11 @@ public class ProductConverter {
         return dto;
     }
 
-    public Set<ProductDTO> fromEntityListToDtoList(List<Product> list){
+    public Set<ProductDTO> fromEntityListToDtoList(List<Product> list) {
         return list.stream().map(this::fromEntityToDto).collect(Collectors.toSet());
     }
 
-    public List<Product> fromDtoListToEntityList(List<ProductDTO> list){
+    public List<Product> fromDtoListToEntityList(List<ProductDTO> list) {
         return list.stream().map(this::fromDtoToEntity).collect(Collectors.toList());
     }
 

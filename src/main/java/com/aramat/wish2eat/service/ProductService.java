@@ -3,7 +3,6 @@ package com.aramat.wish2eat.service;
 import com.aramat.wish2eat.converter.ProductConverter;
 import com.aramat.wish2eat.dto.ProductDTO;
 import com.aramat.wish2eat.entities.Product;
-
 import com.aramat.wish2eat.repositories.ProductRepository;
 import com.aramat.wish2eat.repositories.StoreRepository;
 import com.aramat.wish2eat.service.exceptions.DatabaseException;
@@ -72,12 +71,12 @@ public class ProductService {
         }
     }
 
-    public Product copyDtoToEntity(ProductDTO dto, Product entity){
+    public Product copyDtoToEntity(ProductDTO dto, Product entity) {
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
         entity.setValue(dto.getValue());
         entity.setName(dto.getName());
-        entity.setStore(storeRepository.findById(dto.getStoreID()).orElseThrow(()->new EntityNotFoundException("Loja inexistente")));
+        entity.setStore(storeRepository.findById(dto.getStoreID()).orElseThrow(() -> new EntityNotFoundException("Loja inexistente")));
         return entity;
     }
 }

@@ -15,7 +15,7 @@ public class StoreConverter {
     @Autowired
     private ProductConverter productConverter;
 
-    public Store fromDtoToEntity(StoreInsertDTO dto){
+    public Store fromDtoToEntity(StoreInsertDTO dto) {
         Store store = new Store();
         store.setName(dto.getName());
         store.setFacebook(dto.getFacebook());
@@ -26,11 +26,11 @@ public class StoreConverter {
         store.setPhoneNumber(dto.getPhoneNumber());
         store.setEmail(dto.getEmail());
         store.setPassword(dto.getPassword());
-        store.setProducts(dto.getProducts().stream().map(x->productConverter.fromDtoToEntity(x)).collect(Collectors.toSet()));
+        store.setProducts(dto.getProducts().stream().map(x -> productConverter.fromDtoToEntity(x)).collect(Collectors.toSet()));
         return store;
     }
 
-    public StoreDTO fromEntityToDTO(Store entity){
+    public StoreDTO fromEntityToDTO(Store entity) {
         StoreDTO dto = new StoreDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
@@ -41,7 +41,7 @@ public class StoreConverter {
         dto.setType(entity.getType());
         dto.setPhoneNumber(entity.getPhoneNumber());
         dto.setEmail(entity.getEmail());
-        dto.setProducts(entity.getProducts().stream().map(x->productConverter.fromEntityToDto(x)).collect(Collectors.toSet()));
+        dto.setProducts(entity.getProducts().stream().map(x -> productConverter.fromEntityToDto(x)).collect(Collectors.toSet()));
         return dto;
     }
 
@@ -57,7 +57,7 @@ public class StoreConverter {
         return dto;
     }
 
-    public List<StoreDTO> fromEntityListToDtoList(List<Store> list){
+    public List<StoreDTO> fromEntityListToDtoList(List<Store> list) {
         return list.stream().map(this::fromEntityToDTO).collect(Collectors.toList());
     }
 }

@@ -19,19 +19,19 @@ public class ProductResource {
     private ProductService service;
 
     @GetMapping
-    public ResponseEntity<Set<ProductDTO>> findAll(){
-        Set<ProductDTO> list= service.findAll();
+    public ResponseEntity<Set<ProductDTO>> findAll() {
+        Set<ProductDTO> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ProductDTO> findById(@PathVariable Long id){
+    public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
         ProductDTO dto = service.findById(id);
         return ResponseEntity.ok().body(dto);
     }
 
     @PostMapping
-    public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto){
+    public ResponseEntity<ProductDTO> insert(@Valid @RequestBody ProductDTO dto) {
         dto = service.insert(dto);
         return ResponseEntity.ok().body(dto);
     }

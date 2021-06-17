@@ -2,9 +2,7 @@ package com.aramat.wish2eat.service.validation;
 
 import com.aramat.wish2eat.dto.StoreInsertDTO;
 import com.aramat.wish2eat.entities.Store;
-import com.aramat.wish2eat.entities.User;
 import com.aramat.wish2eat.repositories.StoreRepository;
-import com.aramat.wish2eat.repositories.UserRepository;
 import com.aramat.wish2eat.resources.exceptions.FieldMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 
