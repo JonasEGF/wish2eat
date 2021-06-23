@@ -14,9 +14,7 @@
 	<name>wish2eat</name>
 	<description>Projeto Wish2eat</description>
 	<properties>
-		<java.version>11</java.version>
-	</properties>
-	<properties>
+	  <java.version>11</java.version>
 	  <sonar.projectKey>JonasEGF_wish2eat</sonar.projectKey>
 	  <sonar.organization>jonasegf</sonar.organization>
 	  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
